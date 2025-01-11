@@ -20,15 +20,20 @@
 				<p>To run the server type this in the shell: <em><span class="span-note">"python3 -m http.server"</span></em></p>				
 			</header>
 			<noscript><h4>Tienes javaScript desactivado</h4></noscript>
+
+			<!-- Add category form -->
 			<section id="category">
 				<h2>Create a Category</h2>				
 				<form action="#" method="POST" onsubmit="return false">					
-					<input type="text" name="" value="" id="" placeholder="New category">
-					<input id="addCategory" type="submit" name="" value="Add Category">
+					<input type="text" name="category" value="" id="categoryName" placeholder="New category">
+					<input id="addCategory" type="submit" value="Add Category">
 				</form>
 			</section>
+
+			<!-- Tasks -->
 			<section id="tasks">
 				<h2>Show Tasks by Category</h2>
+				<section id="categories"></section>
 			</section>			
 		</main>
 		<footer>

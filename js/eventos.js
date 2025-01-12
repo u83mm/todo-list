@@ -23,7 +23,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	if(deleteCategory) {
 		deleteCategory.forEach((button) => {
-			button.addEventListener('click', functions.deleteCategory);
+			button.addEventListener('click', () => {
+				functions.deleteCategory(button.id);
+			});
 		});
 	}	
 });

@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	if(addCategory) {
 		addCategory.addEventListener('click', () => {
 			if(inputCategoryName) {
-				inputCategoryName.value != "" ? functions.addCategory(inputCategoryName.value) : alert("No se ha introducido ninguna categoría");
+				inputCategoryName.value != "" ? functions.addCategory(inputCategoryName.value) : alert("Please, enter a category name");
 			}			
 		});
 	}
@@ -26,6 +26,36 @@ window.addEventListener('DOMContentLoaded', () => {
 			button.addEventListener('click', () => {
 				functions.deleteCategory(button.id);
 			});
+		});
+	}
+	
+	// Add Task
+	const addTask = document.querySelectorAll(".addTask");
+
+	if(addTask) {
+		addTask.forEach((button) => {			
+			button.addEventListener('click', () => {
+				functions.addTask(button.id);
+			});
+		});
+	}
+
+	// Delete Task
+	const deleteTask = document.querySelectorAll(".deleteTask");
+
+	if(deleteTask) {
+		let taskName 	= null; 
+		let category 	= null;
+		let taskElement = null;
+
+		deleteTask.forEach((button) => {			
+			button.addEventListener('click', () => {
+				functions.deleteTask(
+					taskName 	= button.parentElement.previousElementSibling.textContent,
+					category 	= button.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML,
+					taskElement = button.parentElement.parentElement
+				);
+			})
 		});
 	}	
 });

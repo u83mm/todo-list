@@ -132,7 +132,7 @@ input[type="text"] {
 	margin-bottom: 0.5em;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
 	padding: 0.5em;
 }
 
@@ -145,8 +145,7 @@ input[type="submit"] {
 }
 
 #categories {
-	display: flex;
-	flex-wrap: wrap;	
+	display: inline-block;	
 }
 
 #categories article {
@@ -157,8 +156,9 @@ input[type="submit"] {
 	box-shadow: 0 5px 5px #7b7373;	
 	margin-right: 0.5em;
 	display: inline-block;
-	min-width: 30em;
+	min-width: 29em;
 	background: antiquewhite;
+	vertical-align: top;
 }
 
 #categories article h3 {
@@ -166,28 +166,61 @@ input[type="submit"] {
 	text-align: center;
 }
 
-.deleteCategory {
+#categories input[type="text"] {
+	width: 55%;
+}
+
+.deleteCategory, .deleteTask {
 	border-radius: 0.3em;
 	border: 1px solid red;
 	color: red;
 	background-color: #f7efef;
 }
 
-.deleteCategory:hover {
+.deleteCategory:hover, .deleteTask:hover {
 	color: white;
 	background-color: red;
 }
 
-.addTask {
+.addTask, .editTask {
 	border: 1px solid green;
 	border-radius: 0.3em;
 	background-color: #f7efef;
 	color: green;
 }
 
-.addTask:hover {
+.addTask:hover, .editTask:hover {
 	color: white;
 	background-color: green;
+}
+
+.tasksList {
+	width: 100%;
+	padding: initial;
+}
+
+.taskTextArea {
+	width: 60%;
+	padding: 0.2em;
+	margin-bottom: 0.5em;
+	font-size: 0.1em;
+	border: 1px solid gray;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+.deleteTask, .editTask {
+	vertical-align: top;
+}
+
+#categories .tasksListArticle {
+	box-shadow: initial;
+	border: none;
+	display: block;
+	padding: initial;
 }
 
 /* #addCategory {

@@ -133,7 +133,7 @@ input[type="text"] {
 }
 
 input[type="submit"], input[type="button"] {
-	padding: 0.5em;
+	padding: 0.4em;
 }
 
 #category input[type="text"] {
@@ -182,14 +182,26 @@ input[type="submit"], input[type="button"] {
 	background-color: red;
 }
 
-.addTask, .editTask {
+.addTask, .editTask, .finishedTask {
 	border: 1px solid green;
 	border-radius: 0.3em;
 	background-color: #f7efef;
 	color: green;
 }
 
-.addTask:hover, .editTask:hover {
+.saveTask {
+	border-radius: 0.3em;
+	border: 1px solid rgb(0, 74, 212);
+	color: rgb(0, 74, 212);
+	background-color: #f7efef;
+}
+
+.saveTask:hover {
+	color: white;
+	background-color: rgb(0, 74, 212);
+}
+
+.addTask:hover, .editTask:hover, .finishedTask:hover {
 	color: white;
 	background-color: green;
 }
@@ -197,22 +209,24 @@ input[type="submit"], input[type="button"] {
 .tasksList {
 	width: 100%;
 	padding: initial;
+	margin-top: 1em;
 }
 
 .taskTextArea {
-	width: 60%;
-	padding: 0.2em;
-	margin-bottom: 0.5em;
-	font-size: 0.1em;
+	width: 80%;
+	padding: 0.4em;
+	margin-bottom: 1em;
+	font-size: 0.6em;
 	border: 1px solid gray;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
+	background-color: #ebe8e8;
 }
 
-.deleteTask, .editTask {
+.deleteTask, .editTask, .saveTask {
 	vertical-align: top;
 }
 
@@ -221,6 +235,16 @@ input[type="submit"], input[type="button"] {
 	border: none;
 	display: block;
 	padding: initial;
+	margin-bottom: 1em;
+}
+
+#categories .tasksListArticle h4 {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.striked {
+	text-decoration: line-through;
 }
 
 /* #addCategory {

@@ -23,9 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	if(deleteCategory) {
 		deleteCategory.forEach((button) => {
-			button.addEventListener('click', () => {
-				functions.deleteCategory(button.id);
-			});
+			button.addEventListener('click', functions.deleteCategory);
 		});
 	}
 	
@@ -34,28 +32,43 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	if(addTask) {
 		addTask.forEach((button) => {			
-			button.addEventListener('click', () => {
-				functions.addTask(button.id);
-			});
+			button.addEventListener('click', functions.addTask);
 		});
 	}
 
 	// Delete Task
 	const deleteTask = document.querySelectorAll(".deleteTask");
 
-	if(deleteTask) {
-		let taskName 	= null; 
-		let category 	= null;
-		let taskElement = null;
-
+	if(deleteTask) {		
 		deleteTask.forEach((button) => {			
-			button.addEventListener('click', () => {
-				functions.deleteTask(
-					taskName 	= button.parentElement.previousElementSibling.textContent,
-					category 	= button.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML,
-					taskElement = button.parentElement.parentElement
-				);
-			})
+			button.addEventListener('click', functions.deleteTask)
 		});
-	}	
+	}
+	
+	// Save task
+	const saveTask = document.querySelectorAll(".saveTask");
+
+	if(saveTask) {
+		saveTask.forEach((button) => {			
+			button.addEventListener('click', functions.saveTaskDescription);
+		});
+	}
+
+	// Edit task
+	const editTask = document.querySelectorAll(".editTask");
+
+	if(editTask) {
+		editTask.forEach((button) => {			
+			button.addEventListener('click', functions.editTaskDescription);
+		});
+	}
+
+	// Finished task
+	const finishedTask = document.querySelectorAll(".finishedTask");
+
+	if(finishedTask) {
+		finishedTask.forEach((button) => {			
+			button.addEventListener('click', functions.markAsFinished	);
+		});
+	}
 });

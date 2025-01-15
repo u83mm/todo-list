@@ -146,14 +146,15 @@ const functions = {
         newTaskElement.querySelector(".editTask").addEventListener("click", functions.editTaskDescription);
 
         // Add event listener to finished task button
-        newTaskElement.querySelector(".finishedTask").addEventListener("click", functions.finishedTask);
+        newTaskElement.querySelector(".finishedTask").addEventListener("click", functions.markAsFinished);
 
         // Save task to localStorage
         const task = {
             id: newTaskElement.id,           
             category: this.parentElement.previousElementSibling.innerHTML,
             name: taskName,
-            description: ""
+            description: "",
+            finished: false
         };      
        
         const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -208,7 +209,7 @@ const functions = {
 
     /** Mark a task as finished */
     markAsFinished : function() {
-        let currentClass = this.parentElement.previousElementSibling.classList;
+        let currentClass = this.parentElement.previousElementSibling.classList;        
         let currentElement = this.parentElement.previousElementSibling.parentElement;
         const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];
 

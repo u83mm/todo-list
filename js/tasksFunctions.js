@@ -97,7 +97,12 @@ const functions = {
                             <input type="button" class="deleteTask" value="Delete Task">
                         </form><hr>`;
                     
-                    document.getElementById(task.category.trim().replaceAll(" ", "")).appendChild(newTaskElement);                   
+                    document.getElementById(task.category.trim().replaceAll(" ", "")).appendChild(newTaskElement);
+                    
+                    // Mark task as finished
+                    if(task.finished) {
+                        newTaskElement.firstElementChild.classList.add("striked");
+                    }
                 }                            
             });
         });
@@ -196,8 +201,20 @@ const functions = {
     },
 
     /** Mark a task as finished */
-    markAsFinished : function() {               
-        this.parentElement.previousElementSibling.classList.add("striked");       
+    markAsFinished : function() {
+        let currentClass = this.parentElement.previousElementSibling.classList;
+        let currentElement = this.parentElement.previousElementSibling.parentElement;
+        const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];
+
+        currentClass.contains("striked") ? currentClass.remove("striked") : currentClass.add("striked");
+        
+        tasksList.forEach((task) => {
+            if(task.id == currentElement.id) {
+                task.finished = !task.finished;
+            }
+        });
+       
+        localStorage.setItem("tasks", JSON.stringify(tasksList));                                        
     }
 }
 

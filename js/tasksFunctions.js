@@ -6,6 +6,13 @@ const functions = {
     addCategory : (categoryName) => {
         const categories = document.querySelector("#categories");
         const newCategory = document.createElement("article");
+        const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+
+        // Test if the category already exists
+        if(categoriesList.includes(categoryName)) {
+            alert(`Category "${categoryName}" already exists`);
+            return;
+        }
 
         newCategory.innerHTML = `
             <h3>${categoryName}</h3>
@@ -27,8 +34,7 @@ const functions = {
         // Add event listener to add task button of the new category
         newCategory.querySelector(".addTask").addEventListener("click", functions.addTask);
 
-        // Save category to localStorage
-        const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+        // Save category to localStorage        
         categoriesList.push(categoryName);
         localStorage.setItem("categories", JSON.stringify(categoriesList));
     },
@@ -38,7 +44,7 @@ const functions = {
         let category = this.parentElement.previousElementSibling.textContent;              
                                 
         // If the user doesn't want to delete the category, return
-        let response = confirm("Are you sure you want to delete this category?");
+        let response = confirm(`Are you sure you want to delete "${category}" category?`);
         if(!response) return;            
         
         // Delete tasks

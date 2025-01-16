@@ -165,10 +165,14 @@ const functions = {
     /** Delete a task from the list of tasks displayed on the webpage */
     deleteTask : function () {
         let taskElement = this.parentElement.parentElement;        
-        const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];        
+        const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];               
 
         for(let i = 0; i < tasksList.length; i++) {
             if(tasksList[i].id == taskElement.id) {
+                // If the user doesn't want to delete the task, return
+                let response = confirm(`Are you sure you want to delete "${tasksList[i].name}" task?`);
+                if(!response) return;
+
                 tasksList.splice(i, 1);
                 i--;
             }

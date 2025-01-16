@@ -108,12 +108,15 @@ section {
 	display:inline-block;
 }
 
-#category {
-	background: lightgray;
+#category {	
 	width: 20%;
 	position: sticky;
 	top: 0px;
 	float:left;
+	border: 1px solid black;
+	border-radius: 0 0 0.5em;
+	box-shadow: 0 0 0.5em;
+	background: #7938384a;
 }
 
 #tasks {
@@ -261,7 +264,12 @@ input[type="submit"], input[type="button"] {
 	#category {
 		width: 100%;
 		margin-bottom: 1.5em;
-	}
+		border-radius: 0;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		-ms-border-radius: 0;
+		-o-border-radius: 0;
+}
 	
 	#tasks {
 		width: 100%;
@@ -297,7 +305,12 @@ input[type="submit"], input[type="button"] {
 		float: initial;
 		display: block;
 		margin-bottom: 2em;
-	}
+		border-radius: 0 0 0.5em 0.5em	;
+		-webkit-border-radius: 0 0 0.5em 0.5em	;
+		-moz-border-radius: 0 0 0.5em 0.5em	;
+		-ms-border-radius: 0 0 0.5em 0.5em	;
+		-o-border-radius: 0 0 0.5em 0.5em	;
+}
 	
 	#tasks {
 		width: 100%;

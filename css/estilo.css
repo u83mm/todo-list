@@ -228,6 +228,7 @@ input[type="submit"], input[type="button"] {
 	-ms-border-radius: 4px;
 	-o-border-radius: 4px;
 	background-color: #ebe8e8;
+	display: none;
 }
 
 .deleteTask, .editTask, .saveTask {

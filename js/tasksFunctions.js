@@ -103,7 +103,17 @@ const functions = {
                             <input type="button" class="deleteTask" value="Delete Task">
                         </form><hr>`;
                     
-                    document.getElementById(task.category.trim().replaceAll(" ", "")).appendChild(newTaskElement);
+                    document.getElementById(task.category.trim().replaceAll(" ", "")).appendChild(newTaskElement);                            
+
+                    // Shows the textarea element based on its current state.
+                    const textArea = newTaskElement.firstElementChild.nextElementSibling.firstElementChild;
+
+                    if(textArea.style.display == "none" || textArea.value != "") {
+                        textArea.style.display = "initial";
+                    }
+                    else {
+                        textArea.style.display = "none";
+                    } 
                     
                     // Mark task as finished
                     if(task.finished) {
@@ -133,7 +143,7 @@ const functions = {
                 <input type="button" class="deleteTask" value="Delete Task">
             </form>`;
 
-        this.parentElement.nextElementSibling.appendChild(newTaskElement);
+        this.parentElement.nextElementSibling.appendChild(newTaskElement);        
         this.previousElementSibling.value = "";
         
         // Add event listener to delete task button        
@@ -198,14 +208,26 @@ const functions = {
         // Disable the textarea
         this.previousElementSibling.disabled = true;
         this.previousElementSibling.style.backgroundColor = "#ebe8e8"
+
+        // Hide the textarea if it's empty
+        if(taskDescription == "") this.previousElementSibling.style.display = "none";
         
         localStorage.setItem("tasks", JSON.stringify(tasksList));        
     },
 
     /** Edit the description of a task */
     editTaskDescription : function() {
-        const disabled = this.parentElement.firstElementChild;        
-        
+        const disabled = this.parentElement.firstElementChild;
+        const display = disabled.style.display;        
+
+        // Shows the textarea element based on its current state.
+        if(display == "" || display == "none" || disabled.value != "") {
+            disabled.style.display = "initial";
+        }
+        else {
+            disabled.style.display = "none";
+        }               
+
         disabled.disabled ? disabled.disabled = false : disabled.disabled = true;
         disabled.disabled ? disabled.style.backgroundColor = "#ebe8e8" : disabled.style.backgroundColor = "white";
         this.parentElement.firstElementChild.focus();        

@@ -79,7 +79,7 @@ const functions = {
             newCategory.innerHTML = `
                 <h3>${category}</h3>
                 <form action="#" method="POST" onsubmit="return false">
-                    <input type="text" name="newTask" value="" placeholder="New task">
+                    <input type="text" class="newTask" name="newTask" value="" placeholder="New task">
                     <input type="submit" class="addTask" value="Add Task">                
                     <input type="submit" class="deleteCategory" value="Delete Category">
                 </form>
@@ -95,6 +95,7 @@ const functions = {
     
                     newTaskElement.innerHTML = `
                         <h4>${task.name}</h4>
+                        <input type="text" class="taskName" name="taskName" value="${task.name}">
                         <form action="#" method="POST" onsubmit="return false">
                             <textarea class="taskTextArea" rows="2" name="task" disabled>${task.description}</textarea>
                             <input type="button" class="saveTask" value="Save Task">
@@ -106,10 +107,10 @@ const functions = {
                     document.getElementById(task.category.trim().replaceAll(" ", "")).appendChild(newTaskElement);                            
 
                     // Shows the textarea element based on its current state.
-                    const textArea = newTaskElement.firstElementChild.nextElementSibling.firstElementChild;
+                    const textArea = newTaskElement.querySelector(".taskTextArea");
 
                     if(textArea.style.display == "none" || textArea.value != "") {
-                        textArea.style.display = "initial";
+                        textArea.style.display = "inherit";
                     }
                     else {
                         textArea.style.display = "none";
@@ -117,7 +118,7 @@ const functions = {
                     
                     // Mark task as finished
                     if(task.finished) {
-                        newTaskElement.firstElementChild.classList.add("striked");
+                        newTaskElement.querySelector("h4").classList.add("striked");
                     }
                 }                            
             });
@@ -125,16 +126,18 @@ const functions = {
     },
 
     /** Add a new task to the list of tasks displayed on the webpage */
-    addTask : function () {                                                                                      
+    addTask : function () {
+        const categoryElement = document.getElementById("categories").firstElementChild;                                                                                           
         const newTaskElement = document.createElement("article");
         newTaskElement.classList.add("tasksListArticle");
         newTaskElement.id = Date.now();        
-        let taskName = this.previousElementSibling.value;                 
+        let taskName = categoryElement.querySelector(".newTask").value;                        
         
         if(!taskName) return alert("Please, enter a task");
         
         newTaskElement.innerHTML = `
             <h4>${taskName}</h4>
+            <input type="text" class="taskName" name="taskName" value="${taskName}">
             <form action="#" method="POST" onsubmit="return false">
                 <textarea class="taskTextArea" rows="2" name="task" disabled></textarea>
                 <input type="button" class="saveTask" value="Save Task">
@@ -143,8 +146,8 @@ const functions = {
                 <input type="button" class="deleteTask" value="Delete Task">
             </form>`;
 
-        this.parentElement.nextElementSibling.appendChild(newTaskElement);        
-        this.previousElementSibling.value = "";
+        categoryElement.querySelector(".tasksList").appendChild(newTaskElement);        
+        categoryElement.querySelector(".newTask").value = "";
         
         // Add event listener to delete task button        
         newTaskElement.querySelector(".deleteTask").addEventListener("click", functions.deleteTask);
@@ -161,7 +164,7 @@ const functions = {
         // Save task to localStorage
         const task = {
             id: newTaskElement.id,           
-            category: this.parentElement.previousElementSibling.innerHTML,
+            category: categoryElement.querySelector("h3").innerHTML,
             name: taskName,
             description: "",
             finished: false
@@ -193,21 +196,31 @@ const functions = {
     },
            
     /** Save the description of a task */
-    saveTaskDescription : function() {                              
-        let taskDescription = this.previousElementSibling.value;        
-        let currentTask = this.parentElement.parentElement.id;                 
+    saveTaskDescription : function() {
+        let taskElement = this.parentElement.parentElement;
+        let textArea = taskElement.querySelector("textarea");                                
+        let taskDescription = textArea.value;        
+        let currentTask = taskElement.id;
+        let newTaskName = taskElement.querySelector(".taskName").value;                       
 
         let tasksList = JSON.parse(localStorage.getItem("tasks")) || [];
 
         tasksList.forEach((task) => {                           
             if(task.id == currentTask) {
                 task.description = taskDescription;
+                task.name = newTaskName;
             }
         });
 
         // Disable the textarea
-        this.previousElementSibling.disabled = true;
-        this.previousElementSibling.style.backgroundColor = "#ebe8e8"
+        textArea.disabled = true;
+        textArea.style.backgroundColor = "#ebe8e8"
+
+        // Hide the edit task name field and shows the current task name
+        taskElement.querySelector(".taskName").style.display = "none";
+        taskElement.querySelector("h4").innerHTML = newTaskName;
+        taskElement.querySelector("h4").style.display = "inherit";
+
 
         // Hide the textarea if it's empty
         if(taskDescription == "") this.previousElementSibling.style.display = "none";
@@ -219,15 +232,22 @@ const functions = {
     editTaskDescription : function() {
         const taskElement = this.parentElement.parentElement;
         const taskTextArea = taskElement.querySelector(".taskTextArea");               
-        const display = taskTextArea.style.display;        
+        const display = taskTextArea.style.display;
+        const editTaskNameField = taskElement.querySelector(".taskName");
+        const taskNameElement = taskElement.querySelector("h4");        
 
         // Shows the textarea element based on its current state.
         if(display == "" || display == "none" || taskTextArea.value != "") {
-            taskTextArea.style.display = "initial";
+            taskTextArea.style.display = "inherit";            
         }
         else {
-            taskTextArea.style.display = "none";
-        }               
+            taskTextArea.style.display = "none";            
+        }
+
+        // Shows the editTaskNameField element based on its current state.
+        editTaskNameField.style.display == "inherit" ? editTaskNameField.style.display = "none" : editTaskNameField.style.display = "inherit";
+        taskNameElement.style.display == "none" ? taskNameElement.style.display = "inherit" : taskNameElement.style.display = "none";
+                
 
         taskTextArea.disabled ? taskTextArea.disabled = false : taskTextArea.disabled = true;
         taskTextArea.disabled ? taskTextArea.style.backgroundColor = "#ebe8e8" : taskTextArea.style.backgroundColor = "white";

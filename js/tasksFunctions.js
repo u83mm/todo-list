@@ -217,32 +217,34 @@ const functions = {
 
     /** Edit the description of a task */
     editTaskDescription : function() {
-        const disabled = this.parentElement.firstElementChild;
-        const display = disabled.style.display;        
+        const taskElement = this.parentElement.parentElement;
+        const taskTextArea = taskElement.querySelector(".taskTextArea");               
+        const display = taskTextArea.style.display;        
 
         // Shows the textarea element based on its current state.
-        if(display == "" || display == "none" || disabled.value != "") {
-            disabled.style.display = "initial";
+        if(display == "" || display == "none" || taskTextArea.value != "") {
+            taskTextArea.style.display = "initial";
         }
         else {
-            disabled.style.display = "none";
+            taskTextArea.style.display = "none";
         }               
 
-        disabled.disabled ? disabled.disabled = false : disabled.disabled = true;
-        disabled.disabled ? disabled.style.backgroundColor = "#ebe8e8" : disabled.style.backgroundColor = "white";
-        this.parentElement.firstElementChild.focus();        
+        taskTextArea.disabled ? taskTextArea.disabled = false : taskTextArea.disabled = true;
+        taskTextArea.disabled ? taskTextArea.style.backgroundColor = "#ebe8e8" : taskTextArea.style.backgroundColor = "white";
+        taskTextArea.focus();        
     },
 
     /** Mark a task as finished */
     markAsFinished : function() {
-        let currentClass = this.parentElement.previousElementSibling.classList;        
-        let currentElement = this.parentElement.previousElementSibling.parentElement;
+        let taskElement = this.parentElement.parentElement;
+        let taskNameElement = taskElement.querySelector("h4");
+                             
         const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];
 
-        currentClass.contains("striked") ? currentClass.remove("striked") : currentClass.add("striked");
+        taskNameElement.classList.contains("striked") ? taskNameElement.classList.remove("striked") : taskNameElement.classList.add("striked");
         
         tasksList.forEach((task) => {
-            if(task.id == currentElement.id) {
+            if(task.id == taskElement.id) {
                 task.finished = !task.finished;
             }
         });

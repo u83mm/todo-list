@@ -155,7 +155,7 @@ input[type="submit"], input[type="button"] {
 #categories article {
 	border: 1px solid gray;
 	padding: 0.5em;
-	margin-bottom: 0.5em;
+	margin-bottom: 2em;
 	border-radius: 0.3em;
 	box-shadow: 0 5px 5px #7b7373;	
 	margin-right: 0.5em;
@@ -163,6 +163,7 @@ input[type="submit"], input[type="button"] {
 	min-width: 29em;
 	background: antiquewhite;
 	vertical-align: top;
+
 }
 
 #categories article h3 {

@@ -17,7 +17,7 @@ const functions = {
         newCategory.innerHTML = `
             <h3>${categoryName}</h3>
             <form action="#" method="POST" onsubmit="return false">
-                <input type="text" name="newTask" value="" placeholder="New task">
+                <input type="text" class="newTask" name="newTask" value="" placeholder="New task">
                 <input type="submit" class="addTask" value="Add Task">                
                 <input type="submit" class="deleteCategory" value="Delete Category">
             </form>
@@ -40,8 +40,9 @@ const functions = {
     },
 
     /** Delete a category from the list of categories displayed on the webpage */
-    deleteCategory : function () {            
-        let category = this.parentElement.previousElementSibling.textContent;              
+    deleteCategory : function () {
+        const categoryElement = this.parentElement.parentElement;           
+        let category = categoryElement.querySelector("h3").textContent;                    
                                 
         // If the user doesn't want to delete the category, return
         let response = confirm(`Are you sure you want to delete "${category}" category?`);
@@ -59,12 +60,10 @@ const functions = {
 
         localStorage.setItem("tasks", JSON.stringify(tasksList));
 
-        // Delete category            
-        const categoryElement = this.closest("article");           
-        const categoriesList = JSON.parse(localStorage.getItem("categories")) || []            
-        categoriesList.splice(categoriesList.indexOf(this.id), 1);
-        localStorage.setItem("categories", JSON.stringify(categoriesList));            
-        
+        // Delete category                   
+        const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];            
+        categoriesList.splice(categoriesList.indexOf(category), 1);        
+        localStorage.setItem("categories", JSON.stringify(categoriesList));                    
         categoryElement.remove();            
     },
 
@@ -72,7 +71,7 @@ const functions = {
     showCategories : () => {
         const categories = document.querySelector("#categories");
         const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
-        const tasksList = JSON.parse(localStorage.getItem("tasks")) || []; 
+        const tasksList = JSON.parse(localStorage.getItem("tasks")) || [];             
                         
         categoriesList.forEach((category) => {            
             const newCategory = document.createElement("article");
@@ -127,12 +126,13 @@ const functions = {
 
     /** Add a new task to the list of tasks displayed on the webpage */
     addTask : function () {
-        const categoryElement = document.getElementById("categories").firstElementChild;                                                                                           
+        const categoryElement = this.parentElement.parentElement;                                                                                           
         const newTaskElement = document.createElement("article");
+        let taskName = categoryElement.querySelector(".newTask").value;
+
         newTaskElement.classList.add("tasksListArticle");
         newTaskElement.id = Date.now();        
-        let taskName = categoryElement.querySelector(".newTask").value;                        
-        
+                                        
         if(!taskName) return alert("Please, enter a task");
         
         newTaskElement.innerHTML = `

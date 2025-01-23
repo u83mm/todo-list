@@ -9,6 +9,10 @@ const functions = {
         const categories = document.querySelector("#categories");
         const newCategory = document.createElement("article");
         const categoriesList = JSON.parse(localStorage.getItem("categories")) || [];
+        let theme = JSON.parse(localStorage.getItem("theme"));
+
+        // Set elements theme
+        if(theme == "dark") newCategory.classList.add("darkMode");
 
         // Test if the category already exists
         if(categoriesList.includes(categoryName)) {
@@ -131,9 +135,13 @@ const functions = {
         const categoryElement = this.parentElement.parentElement;                                                                                           
         const newTaskElement = document.createElement("article");
         let taskName = categoryElement.querySelector(".newTask").value;
+        let theme = JSON.parse(localStorage.getItem("theme"));
 
         newTaskElement.classList.add("tasksListArticle");
-        newTaskElement.id = Date.now();        
+        newTaskElement.id = Date.now();
+        
+        // Set elements theme
+        if(theme == "dark") newTaskElement.classList.add("darkMode");
                                         
         if(!taskName) return alert("Please, enter a task");
         

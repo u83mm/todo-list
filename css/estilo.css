@@ -31,8 +31,7 @@ body {
 	font-family: ubuntuRegular;
 	font-size: 100%;
 	margin: 0 auto;
-	border: 2px solid blue;
-	box-shadow: 5px 15px 15px #7b7373;
+	border: 2px solid blue;	
 	border-radius: 10px;
 }
 
@@ -263,6 +262,46 @@ input[type="submit"], input[type="button"] {
 	display: none;
 }
 
+.mode{
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	padding: 0.5em;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.mode h5 {
+	padding: 0.5em;
+}
+
+.darkMode {
+	color: white;
+	background: black;
+}
+
+#category.darkMode {
+	background: black;
+}
+
+#categories article.darkMode {
+	background: #484646;
+	color: #d0cfcf;
+}
+
+.darkModeIcon {
+	color: black;
+	cursor: pointer;
+}
+
+.darkModeIcon.darkMode {
+	color: white;		
+}
+
+.darkModeIcon:hover {
+	color: darkgoldenrod;
+}
+
 /* #addCategory {
 	margin-bottom: 1em;
 	background-color: green;
@@ -273,15 +312,14 @@ input[type="submit"], input[type="button"] {
 
 /***************** Configuración para móviles **********************/
 @media (max-width:480px) {
-	#category {
-		width: 100%;
+	#category {		
 		margin-bottom: 1.5em;
 		border-radius: 0;
 		-webkit-border-radius: 0;
 		-moz-border-radius: 0;
 		-ms-border-radius: 0;
 		-o-border-radius: 0;
-}
+	}
 	
 	#tasks {
 		width: 100%;
@@ -297,7 +335,9 @@ input[type="submit"], input[type="button"] {
 		margin-right: 0em;
 	}
 
-
+	#category form {
+		width: 100%;
+	}
 }
 
 /************************************************************************
@@ -311,8 +351,7 @@ input[type="submit"], input[type="button"] {
 *			Configuración para tablets portrait (retrato)						*
 ************************************************************************/
 @media (min-width:481px) and (max-width: 768px) {
-	#category {
-		width: 70%;
+	#category {		
 		margin: 0 auto;
 		float: initial;
 		display: block;
@@ -336,13 +375,17 @@ input[type="submit"], input[type="button"] {
 		width: 100%;
 		margin-right: 0em;
 	}
+
+	#category form {
+		width: 70%;
+	}
 }
 
 /***************************************************************
 *		Configuración para tablets landscape (horizontal)	   *
 ***************************************************************/
 @media (min-width: 769px) and (max-width: 1050px) {
-	#category {
+	#category form {
 		width: 30%;
 	}
 	
@@ -364,7 +407,7 @@ input[type="submit"], input[type="button"] {
 *			 Configuración para KINDLE FIRE					   *
 ***************************************************************/
 @media (min-width: 1051px) and (max-width: 1280px) {
-		#category {
+		#category form {
 			width: 35%;
 		}
 		

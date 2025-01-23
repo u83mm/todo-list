@@ -1,13 +1,20 @@
 "use strict";
 
 import { functions } from "./tasksFunctions.js";
+import { themeFunctions } from "./themeFunctions.js";
 
 const addCategory = document.querySelector("#addCategory");
 const inputCategoryName = document.querySelector("#categoryName");
+let theme = JSON.parse(localStorage.getItem("theme"));
+
+if(!theme) localStorage.setItem("theme", JSON.stringify("light"));
 
 window.addEventListener('DOMContentLoaded', () => {
 	// Show categories
-	functions.showCategories();		
+	functions.showCategories();
+	
+	// Show theme
+	themeFunctions.showTheme();
 
 	// Add Category
 	if(addCategory) {
@@ -70,5 +77,13 @@ window.addEventListener('DOMContentLoaded', () => {
 		finishedTask.forEach((button) => {			
 			button.addEventListener('click', functions.markAsFinished	);
 		});
+	}
+
+	// Change theme
+	const darkModeBotton = document.querySelector("#darkMode");
+
+	if(darkModeBotton) {
+		darkModeBotton.addEventListener('click', themeFunctions.changeTheme);
+		darkModeBotton.addEventListener('click', themeFunctions.showTheme);
 	}
 });

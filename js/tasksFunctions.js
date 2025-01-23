@@ -1,3 +1,5 @@
+import { themeFunctions } from "./themeFunctions.js";
+
 const functions = {
     /**
      * Add a new category to the list of categories displayed on the webpage. 
@@ -270,7 +272,7 @@ const functions = {
         });
        
         localStorage.setItem("tasks", JSON.stringify(tasksList));                                        
-    }
+    }    
 }
 
 export { functions };

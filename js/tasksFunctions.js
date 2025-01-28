@@ -154,7 +154,7 @@ const functions = {
                 <input type="button" class="editTask" value="Edit Task">
                 <input type="button" class="finishedTask" value="Finished Task">
                 <input type="button" class="deleteTask" value="Delete Task">
-            </form>`;
+            </form><hr/>`;
 
         categoryElement.querySelector(".tasksList").appendChild(newTaskElement);        
         categoryElement.querySelector(".newTask").value = "";

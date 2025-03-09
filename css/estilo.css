@@ -110,8 +110,9 @@ section {
 #category {	
 	width: 100%;
 	position: sticky;
-	top: 0px;	
+	top: 0px;
 	background: white;
+	padding-bottom: 2em;
 }
 
 #category form {
@@ -330,6 +331,7 @@ input[type="submit"], input[type="button"] {
 .darkModeIcon:hover {
 	color: darkgoldenrod;
 }
+
 
 /* #addCategory {
 	margin-bottom: 1em;
